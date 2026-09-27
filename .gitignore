@@ -1,0 +1,23 @@
+# Environnement virtuel
+venv/
+env/
+pyvenv.cfg
+
+# Fichiers générés et cache Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Dossiers de données (on ne versionne JAMAIS les données)
+data/raw/*.csv
+data/processed/*.csv
+data/raw/*.parquet
+data/processed/*.parquet
+
+# Dossier des modèles
+models/*.pkl
+models/*.joblib
+
+# Logs
+*.log

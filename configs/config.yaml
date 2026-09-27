@@ -1,0 +1,65 @@
+# ============================================================
+# Configuration centralisée — Credit Survival Risk
+# ============================================================
+
+data:
+  raw_path: "data/raw/german_credit_data.csv"
+  processed_path: "data/processed/german_credit_survival.csv"
+  random_seed: 42
+
+# -------------------------------------------------------
+# Paramètres de simulation de la variable cible
+# (Justification : le dataset German Credit n'a pas de
+#  variable temporelle de défaut. On simule un processus
+#  Weibull réaliste paramétré par les covariables.)
+# -------------------------------------------------------
+target_simulation:
+  # Paramètre de forme Weibull (k > 1 → hazard croissant dans le temps,
+  # ce qui est réaliste : plus un emprunteur fragile reste exposé, plus
+  # la probabilité de défaut augmente)
+  weibull_shape: 1.5
+
+  # Échelle de base en mois (contrôle la durée médiane avant défaut)
+  base_scale: 48.0
+
+  # Poids des covariables dans le score de risque latent
+  weights:
+    credit_amount: 0.30
+    saving_accounts: 0.25
+    checking_account: 0.20
+    age: 0.10
+    housing: 0.10
+    job: 0.05
+
+  # Encodages ordinaux : valeur basse = profil plus risqué
+  saving_ordinal:
+    "NA": 0
+    "little": 1
+    "moderate": 2
+    "quite rich": 3
+    "rich": 4
+
+  checking_ordinal:
+    "NA": 0
+    "little": 1
+    "moderate": 2
+    "rich": 3
+
+  # Score de risque lié au logement (0 = sûr, 1 = risqué)
+  housing_risk:
+    rent: 0.8
+    free: 0.5
+    own: 0.2
+
+# -------------------------------------------------------
+# Hyperparamètres des modèles (ÉTAPE 2)
+# -------------------------------------------------------
+models:
+  output_dir: "models/"
+  cox:
+    penalizer: 0.1
+  rsf:
+    n_estimators: 200
+    max_depth: 5
+    min_samples_split: 10
+    random_state: 42
