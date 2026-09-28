@@ -10,6 +10,7 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Dossiers de données (on ne versionne JAMAIS les données)
+echo "*.csv" >> .gitignore
 data/raw/*.csv
 data/processed/*.csv
 data/raw/*.parquet
