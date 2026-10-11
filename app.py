@@ -64,7 +64,7 @@ if st.button("Lancer la simulation de survie", type="primary", use_container_wid
                 with res_col1:
                     st.metric(label="Score de Risque (Hazard Score)", value=f"{score:.3f}")
                 with res_col2:
-                    if score > 50: # Seuil fictif à ajuster selon tes observations
+                    if score > 12.4 : # Seuil fictif à ajuster selon tes observations
                         st.error("⚠️ Risque élevé : Le défaut de paiement est susceptible d'arriver rapidement.")
                     else:
                         st.success("✅ Risque maîtrisé : Profil de survie favorable.")
