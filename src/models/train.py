@@ -48,7 +48,7 @@ def train_and_evaluate():
     df = pd.read_csv(data_path)
 
     # 2. Séparation des features (X) et de la cible (y)
-    X = df.drop(columns=['time', 'event', 'default', 'Risk'], errors='ignore')
+    X = df.drop(columns=['time', 'event', 'default', 'Risk' , 'Duration'], errors='ignore')
     y = create_survival_y(df)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
